@@ -12,7 +12,7 @@ public class LoginController {
 
     @FXML
     protected void onLoginButtonClick() {
-        System.out.println("Username: " + usernameText.getText());
+        System.out.println("LOGIN");
     }
 
 }

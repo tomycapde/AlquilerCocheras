@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.alquilercocheras.MainMenu">
+    <children>
+      <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+              <TabPane prefHeight="573.0" prefWidth="753.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+                  <tabs>
+                      <Tab text="Mensuales">
+                          <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                  <children>
+                                      <TableView prefHeight="547.0" prefWidth="753.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <columns>
+                                              <TableColumn prefWidth="75.0" text="Patente" />
+                                              <TableColumn prefWidth="75.0" text="Vehiculo" />
+                                              <TableColumn prefWidth="75.0" text="Apellido" />
+                                              <TableColumn prefWidth="75.0" text="Contacto" />
+                                              <TableColumn prefWidth="75.0" text="Entrada" />
+                                              <TableColumn prefWidth="75.0" text="Salida" />
+                                              <TableColumn prefWidth="75.0" text="Abonado" />
+                                              <TableColumn prefWidth="75.0" text="Total" />
+                                          </columns>
+                                      </TableView>
+                                  </children>
+                              </AnchorPane>
+                          </content>
+                      </Tab>
+                      <Tab text="Clientes">
+                          <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                          </content>
+                      </Tab>
+                  </tabs>
+              </TabPane>
+         </children>
+      </VBox>
+    </children>
+</AnchorPane>
