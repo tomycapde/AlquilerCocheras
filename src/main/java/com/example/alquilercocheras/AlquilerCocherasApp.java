@@ -1,5 +1,6 @@
 package com.example.alquilercocheras;
 
+import com.example.alquilercocheras.database.DatabaseConnection;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -7,10 +8,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class AlquilerCocherasApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/alquilercocheras/login-view.fxml"));
+        DatabaseConnection.initializeDatabase();
+        FXMLLoader fxmlLoader = new FXMLLoader(AlquilerCocherasApp.class.getResource("/com/example/alquilercocheras/fxml/login-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 400, 600);
         stage.setTitle("Login");
         stage.setScene(scene);

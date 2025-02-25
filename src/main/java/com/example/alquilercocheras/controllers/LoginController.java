@@ -26,7 +26,7 @@ public class LoginController {
                 System.out.println("Login successful");
 
                 // Load the main menu
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/alquilercocheras/main-menu.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/alquilercocheras/fxml/main-menu.fxml"));
                 Parent root = fxmlLoader.load();
                 Stage stage = new Stage();
                 stage.setTitle("Main Menu");
