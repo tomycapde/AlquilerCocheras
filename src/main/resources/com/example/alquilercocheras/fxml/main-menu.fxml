@@ -7,12 +7,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.alquilercocheras.controllers.MainController">
+<AnchorPane prefHeight="714.0" prefWidth="909.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.alquilercocheras.controllers.MainController">
     <children>
       <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-              <TabPane prefHeight="573.0" prefWidth="753.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+              <TabPane prefHeight="433.0" prefWidth="661.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
                   <tabs>
                       <Tab text="Mensuales">
                           <content>
@@ -36,7 +35,19 @@
                       </Tab>
                       <Tab text="Clientes">
                           <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView prefHeight="372.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columns>
+                                  <TableColumn prefWidth="116.0" text="Nombre" />
+                                  <TableColumn prefWidth="96.0" text="Apellido" />
+                                    <TableColumn prefWidth="76.0" text="DNI" />
+                                    <TableColumn prefWidth="101.0" text="Vehiculo" />
+                                    <TableColumn prefWidth="95.0" text="Contacto" />
+                                    <TableColumn prefWidth="115.0" text="Patente" />
+                                </columns>
+                              </TableView>
+                           </children></AnchorPane>
                           </content>
                       </Tab>
                   </tabs>
