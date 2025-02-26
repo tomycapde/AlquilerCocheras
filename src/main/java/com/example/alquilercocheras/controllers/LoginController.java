@@ -1,5 +1,6 @@
 package com.example.alquilercocheras.controllers;
 
+import com.example.alquilercocheras.utils.AlertPanel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -39,6 +40,7 @@ public class LoginController {
 
             } else {
                 System.out.println("Login failed");
+                AlertPanel.showSimpleAlert("Error", "Usuario o contraseña incorrectos");
             }
 
         } catch (Exception e) {
