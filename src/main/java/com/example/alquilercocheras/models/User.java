@@ -5,6 +5,9 @@ public class User {
     private int idUser;
     private String username;
     private String password;
+    private String surname;
+    private String DNI;
+    private String phone;
     private int userTypeId;
     private boolean admin;
 
@@ -50,4 +53,18 @@ public class User {
     public void setUserTypeId(int userTypeId) {
         this.userTypeId = userTypeId;
     }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setDNI(String DNI) {
+        this.DNI = DNI;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+
 }
