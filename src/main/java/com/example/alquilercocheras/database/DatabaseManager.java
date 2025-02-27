@@ -29,7 +29,9 @@ public class DatabaseManager {
                 CREATE TABLE IF NOT EXISTS Cliente (
                     idCliente INTEGER PRIMARY KEY AUTOINCREMENT,
                     nombre TEXT NOT NULL,
-                    dni TEXT UNIQUE NOT NULL
+                    apellido TEXT NOT NULL,
+                    dni TEXT UNIQUE NOT NULL,
+                    telefono TEXT NOT NULL
                 );
 
                 CREATE TABLE IF NOT EXISTS TipoVehiculo (
@@ -72,8 +74,10 @@ public class DatabaseManager {
                 CREATE TABLE IF NOT EXISTS Usuario (
                     idUsuario INTEGER PRIMARY KEY AUTOINCREMENT,
                     nombre TEXT NOT NULL,
+                    contrasenia TEXT NOT NULL,
                     apellido TEXT NOT NULL,
                     dni TEXT UNIQUE NOT NULL,
+                    telefono TEXT NULL,
                     idTipoUsuario INTEGER NOT NULL,
                     FOREIGN KEY (idTipoUsuario) REFERENCES TipoUsuario(idTipoUsuario)
                 );
