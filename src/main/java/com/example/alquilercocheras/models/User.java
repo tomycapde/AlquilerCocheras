@@ -5,6 +5,7 @@ public class User {
     private int idUser;
     private String username;
     private String password;
+    private int userTypeId;
     private boolean admin;
 
     public User() {
@@ -40,5 +41,13 @@ public class User {
 
     public void setAdmin(boolean admin) {
         this.admin = admin;
+    }
+
+    public int getUserTypeId() {
+        return userTypeId;
+    }
+
+    public void setUserTypeId(int userTypeId) {
+        this.userTypeId = userTypeId;
     }
 }
