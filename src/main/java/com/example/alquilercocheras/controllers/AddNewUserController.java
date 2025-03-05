@@ -1,7 +1,5 @@
 package com.example.alquilercocheras.controllers;
 
-import com.example.alquilercocheras.AlquilerCocherasApp;
-import com.example.alquilercocheras.database.DatabaseManager;
 import com.example.alquilercocheras.database.UserTypeDAO;
 import com.example.alquilercocheras.database.UsersDAO;
 import com.example.alquilercocheras.models.User;
@@ -24,7 +22,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 // Do registry controller
-public class RegisterController {
+public class AddNewUserController implements Initializable {
 
     public Button registerButton;
     @FXML
@@ -42,6 +40,18 @@ public class RegisterController {
     @FXML
     private ComboBox<String> userTypeID;
     private User user;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        List<UserType> userTypeList = UserTypeDAO.getUserTypes();
+        if (userTypeList == null) {
+            System.out.println("No se pudo obtener la lista de tipos de usuario");
+            return;
+        }
+        for (UserType userType : userTypeList) {
+            userTypeID.getItems().add(userType.getIdUserType() + "(" + userType.getDescription() + ")");
+        }
+    }
 
     public void clearFields() {
         userTextField.clear();
@@ -75,12 +85,18 @@ public class RegisterController {
                 return;
 
             }
+            if (userTypeID.getValue() == null) {
+                AlertPanel.showSimpleAlert("Error", "Debe seleccionar un tipo de usuario");
+                System.out.println("Please select a user type");
+                return;
+            }
             newUser.setUsername(userTextField.getText());
             newUser.setPassword(PasswordHasher.hashPassword(passwordTextField.getText()));
             newUser.setSurname(surname.getText());
             newUser.setDNI(DNI.getText());
             newUser.setPhone(phone.getText());
-            newUser.setUserTypeId(1);
+            String userType = userTypeID.getValue();
+            newUser.setUserTypeId(Integer.parseInt(userType.substring(0, userType.indexOf("("))));
 
             System.out.println(newUser.toString());
             UsersDAO.registerUser(newUser);
@@ -88,15 +104,7 @@ public class RegisterController {
             AlertPanel.showSimpleAlert("Registro", "Usuario registrado correctamente");
             clearFields();
 
-            // Load the login view
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/alquilercocheras/fxml/login-view.fxml"));
-            Parent root = fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setTitle("Login");
-            stage.setScene(new Scene(root));
-            stage.show();
-
-            // Close the register window
+            // Close the window
             registerButton.getScene().getWindow().hide();
 
         } catch (Exception e) {

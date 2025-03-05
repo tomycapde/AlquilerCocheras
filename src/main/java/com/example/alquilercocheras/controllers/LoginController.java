@@ -1,7 +1,9 @@
 package com.example.alquilercocheras.controllers;
 
 import com.example.alquilercocheras.database.UsersDAO;
+import com.example.alquilercocheras.models.User;
 import com.example.alquilercocheras.utils.AlertPanel;
+import com.example.alquilercocheras.utils.PasswordHasher;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,7 +26,7 @@ public class LoginController {
             String username = usernameText.getText();
             String password = passwordText.getText();
 
-            if (UsersDAO.getUser(username, password) != null) {
+            if (authenticateUser(username, password)) {
                 System.out.println("Login successful");
 
                 // Load the main menu
@@ -47,5 +49,13 @@ public class LoginController {
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
+    }
+
+    private boolean authenticateUser(String username, String password) {
+        User user = UsersDAO.getUser(username);
+        if (user != null) {
+            return PasswordHasher.hashPassword(password).equals(user.getPassword());
+        }
+        return false;
     }
 }

@@ -7,6 +7,10 @@ import java.sql.*;
 public class UsersDAO {
 
     public static void registerUser(User user) {
+        if (userExists(user.getUsername())) {
+            System.out.println("El usuario ya existe");
+            throw new IllegalArgumentException("El usuario ya existe");
+        }
         try {
             PreparedStatement preparedStatement = DatabaseConnection.getInstance().prepareStatement("INSERT INTO Usuario (nombre, contrasenia, apellido, dni, telefono, idTipoUsuario) VALUES (?, ?, ?, ?, ?, ?)");
             preparedStatement.setString(1, user.getUsername());
@@ -24,13 +28,12 @@ public class UsersDAO {
         }
     }
 
-    public static User getUser(String username, String password) {
-        String query = "SELECT * FROM Usuario WHERE nombre = ? AND contrasenia = ?";
+    public static User getUser(String username) {
+        String query = "SELECT * FROM Usuario WHERE nombre = ?";
         try {
             Connection conn = DatabaseConnection.getInstance();
             PreparedStatement preparedStatement = conn.prepareStatement(query);
             preparedStatement.setString(1, username);
-            preparedStatement.setString(2, password);
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
                 User user = new User();
@@ -50,5 +53,19 @@ public class UsersDAO {
             return null;
         }
         return null;
+    }
+
+    public static boolean userExists(String username) {
+        String query = "SELECT COUNT(*) FROM Usuario WHERE nombre = ?";
+        try {
+            Connection conn = DatabaseConnection.getInstance();
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, username);
+            ResultSet rs = preparedStatement.executeQuery();
+            return rs.next() && rs.getInt(1) > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
