@@ -7,4 +7,6 @@ module com.example.alquilercocheras {
     opens com.example.alquilercocheras.controllers to javafx.fxml;
     exports com.example.alquilercocheras.controllers to javafx.fxml;
     exports com.example.alquilercocheras to javafx.graphics;
+
+    opens com.example.alquilercocheras.models to javafx.base;
 }

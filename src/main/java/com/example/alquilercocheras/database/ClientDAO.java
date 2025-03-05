@@ -5,6 +5,8 @@ import com.example.alquilercocheras.models.Client;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ClientDAO {
 
@@ -26,6 +28,31 @@ public class ClientDAO {
             e.printStackTrace();
         }
     }
+
+    public static List<Client> getClients() {
+        List<Client> clients = new ArrayList<>();
+        try {
+            Connection conn = DatabaseConnection.getInstance();
+            PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM Cliente");
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                Client client = new Client();
+                client.setIdClient(rs.getInt("idCliente"));
+                client.setName(rs.getString("nombre"));
+                client.setLastName(rs.getString("apellido"));
+                client.setDni(rs.getString("dni"));
+                client.setPhone(rs.getString("telefono"));
+                clients.add(client);
+            }
+            preparedStatement.close();
+            return clients;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
 
     public static boolean clientExists(String dni) {
         String query = "SELECT COUNT(*) FROM Cliente WHERE dni = ?";
