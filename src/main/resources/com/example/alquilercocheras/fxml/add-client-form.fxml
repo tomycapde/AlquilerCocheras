@@ -31,7 +31,6 @@
                 <RowConstraints minHeight="40" />
                 <RowConstraints minHeight="40" />
                 <RowConstraints minHeight="40" />
-                <RowConstraints minHeight="40" />
                 <RowConstraints minHeight="50" />
             </rowConstraints>
 
@@ -41,16 +40,13 @@
             <Label text="Apellido:" GridPane.rowIndex="1" GridPane.columnIndex="0" style="-fx-font-size: 14px; -fx-text-fill: #555;" />
             <TextField fx:id="apellidoTextField" GridPane.rowIndex="1" GridPane.columnIndex="1" style="-fx-font-size: 14px; -fx-padding: 5px;" />
 
-            <Label text="Dirección:" GridPane.rowIndex="2" GridPane.columnIndex="0" style="-fx-font-size: 14px; -fx-text-fill: #555;" />
-            <TextField fx:id="direccionTextField" GridPane.rowIndex="2" GridPane.columnIndex="1" style="-fx-font-size: 14px; -fx-padding: 5px;" />
+            <Label text="DNI:" GridPane.rowIndex="2" GridPane.columnIndex="0" style="-fx-font-size: 14px; -fx-text-fill: #555;" />
+            <TextField fx:id="dniTextField" GridPane.rowIndex="2" GridPane.columnIndex="1" style="-fx-font-size: 14px; -fx-padding: 5px;" />
 
             <Label text="Teléfono:" GridPane.rowIndex="3" GridPane.columnIndex="0" style="-fx-font-size: 14px; -fx-text-fill: #555;" />
             <TextField fx:id="telefonoTextField" GridPane.rowIndex="3" GridPane.columnIndex="1" style="-fx-font-size: 14px; -fx-padding: 5px;" />
 
-            <Label text="Correo Electrónico:" GridPane.rowIndex="4" GridPane.columnIndex="0" style="-fx-font-size: 14px; -fx-text-fill: #555;" />
-            <TextField fx:id="correoTextField" GridPane.rowIndex="4" GridPane.columnIndex="1" style="-fx-font-size: 14px; -fx-padding: 5px;" />
-
-            <Button text="Registrar" onAction="#handleRegisterButtonAction" GridPane.rowIndex="5" GridPane.columnIndex="1"
+            <Button text="Registrar" onAction="#handleRegisterButtonAction" GridPane.rowIndex="4" GridPane.columnIndex="1"
                     style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 10px 20px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-font-weight: bold; -fx-cursor: hand;" />
         </GridPane>
     </VBox>

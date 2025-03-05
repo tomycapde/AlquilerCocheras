@@ -11,6 +11,13 @@ public class Client {
     public Client() {
     }
 
+    public Client(String name, String lastName, String dni, String phone) {
+        this.name = name;
+        this.lastName = lastName;
+        this.dni = dni;
+        this.phone = phone;
+    }
+
     public int getIdClient() {
         return idClient;
     }
