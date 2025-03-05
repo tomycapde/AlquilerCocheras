@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 
 public class DatabaseManager {
 
-    // Initialize Database
+    // Inicializa la base de datos
     public static void initializeDatabase() {
         Connection conn = DatabaseConnection.getInstance();
         if (conn == null) {
@@ -15,15 +15,12 @@ public class DatabaseManager {
             return;
         }
 
-        Statement stmt = null;
-        try {
-            stmt = conn.createStatement();
-
+        try (Statement stmt = conn.createStatement()) {
             // Sentencias para crear las tablas si no existen
             String sql = """
                 CREATE TABLE IF NOT EXISTS TipoEstadia (
                     idTipoEstadia INTEGER PRIMARY KEY AUTOINCREMENT,
-                    descripcion TEXT NOT NULL
+                    descripcion TEXT NOT NULL UNIQUE
                 );
 
                 CREATE TABLE IF NOT EXISTS Cliente (
@@ -36,7 +33,7 @@ public class DatabaseManager {
 
                 CREATE TABLE IF NOT EXISTS TipoVehiculo (
                     idTipoVehiculo INTEGER PRIMARY KEY AUTOINCREMENT,
-                    descripcion TEXT NOT NULL
+                    descripcion TEXT NOT NULL UNIQUE
                 );
 
                 CREATE TABLE IF NOT EXISTS Vehiculo (
@@ -62,13 +59,13 @@ public class DatabaseManager {
 
                 CREATE TABLE IF NOT EXISTS Precio (
                     idPrecio INTEGER PRIMARY KEY AUTOINCREMENT,
-                    descripcion TEXT NOT NULL,
+                    descripcion TEXT NOT NULL UNIQUE,
                     precio REAL NOT NULL
                 );
 
                 CREATE TABLE IF NOT EXISTS TipoUsuario (
                     idTipoUsuario INTEGER PRIMARY KEY AUTOINCREMENT,
-                    descripcion TEXT NOT NULL
+                    descripcion TEXT NOT NULL UNIQUE
                 );
 
                 CREATE TABLE IF NOT EXISTS Usuario (
@@ -84,63 +81,51 @@ public class DatabaseManager {
                 """;
 
             stmt.executeUpdate(sql);
-
             System.out.println("Base de datos inicializada correctamente.");
 
-            insertBasicData();
+            insertBasicData(conn);
 
         } catch (SQLException e) {
             System.out.println("Error al inicializar la base de datos: " + e.getMessage());
-        } finally {
-            try {
-                if (stmt != null) stmt.close();
-            } catch (SQLException e) {
-                System.out.println("Error al cerrar el Statement: " + e.getMessage());
-            }
         }
     }
 
-    // Load Basic Data
-    private static void insertBasicData() {
-        Connection conn = DatabaseConnection.getInstance();
-        if (conn == null) {
-            System.out.println("No se pudo obtener la conexión a la base de datos.");
-            return;
-        }
+    // Inserta datos básicos si las tablas están vacías
+    private static void insertBasicData(Connection conn) {
+        try (Statement stmt = conn.createStatement()) {
 
-        Statement stmt = null;
-        try {
-            stmt = conn.createStatement();
+            if (isTableEmpty(conn, "TipoEstadia")) {
+                stmt.executeUpdate("INSERT INTO TipoEstadia (descripcion) VALUES ('Mensual');");
+                System.out.println("Datos insertados en TipoEstadia.");
+            }
 
-            // Sentencias para insertar datos básicos
-            String sql = """
-                INSERT INTO TipoEstadia (descripcion) VALUES ('Mensual');
+            if (isTableEmpty(conn, "TipoVehiculo")) {
+                stmt.executeUpdate("INSERT INTO TipoVehiculo (descripcion) VALUES ('Auto'), ('Moto'), ('Camioneta'), ('Bicicleta');");
+                System.out.println("Datos insertados en TipoVehiculo.");
+            }
 
-                INSERT INTO TipoVehiculo (descripcion) VALUES ('Auto');
-                INSERT INTO TipoVehiculo (descripcion) VALUES ('Moto');
-                INSERT INTO TipoVehiculo (descripcion) VALUES ('Camioneta');
-                INSERT INTO TipoVehiculo (descripcion) VALUES ('Bicicleta');
-
-                INSERT INTO TipoUsuario (descripcion) VALUES ('Administrador');
-                INSERT INTO TipoUsuario (descripcion) VALUES ('Usuario');
-                """;
-
-            stmt.executeUpdate(sql);
-
-            System.out.println("Datos básicos insertados correctamente.");
+            if (isTableEmpty(conn, "TipoUsuario")) {
+                stmt.executeUpdate("INSERT INTO TipoUsuario (descripcion) VALUES ('Administrador'), ('Usuario');");
+                System.out.println("Datos insertados en TipoUsuario.");
+            }
 
         } catch (SQLException e) {
             System.out.println("Error al insertar datos básicos: " + e.getMessage());
-        } finally {
-            try {
-                if (stmt != null) stmt.close();
-            } catch (SQLException e) {
-                System.out.println("Error al cerrar el Statement: " + e.getMessage());
-            }
         }
     }
 
-    // Verify if the database has users
+    // Verifica si una tabla está vacía
+    private static boolean isTableEmpty(Connection conn, String tableName) {
+        String query = "SELECT COUNT(*) FROM " + tableName;
+        try (Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+            return rs.next() && rs.getInt(1) == 0;
+        } catch (SQLException e) {
+            System.out.println("Error al verificar si la tabla " + tableName + " está vacía: " + e.getMessage());
+            return false;
+        }
+    }
+
     public static boolean databaseHasUsers() {
         Connection conn = DatabaseConnection.getInstance();
         if (conn == null) {
@@ -148,28 +133,14 @@ public class DatabaseManager {
             return false;
         }
 
-        Statement stmt = null;
-        ResultSet rs = null;
-        try {
-            stmt = conn.createStatement();
-            rs = stmt.executeQuery("SELECT COUNT(*) FROM Usuario");
-
+        try (Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM Usuario")) {
             return rs.next() && rs.getInt(1) > 0;
-
         } catch (SQLException e) {
             System.out.println("Error al verificar si la base de datos tiene usuarios: " + e.getMessage());
             return false;
-        } finally {
-            try {
-                if (rs != null) rs.close();
-                if (stmt != null) stmt.close();
-            } catch (SQLException e) {
-                System.out.println("Error al cerrar recursos: " + e.getMessage());
-            }
         }
     }
-
-
 
     public static void main(String[] args) {
         initializeDatabase();

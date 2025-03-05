@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.PasswordField?>
 <AnchorPane prefHeight="535.0" prefWidth="483.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.alquilercocheras.controllers.RegisterController">
    <children>
       <VBox layoutX="4.0" prefHeight="535.0" prefWidth="483.0">
@@ -55,8 +56,8 @@
                   <Label alignment="CENTER" prefHeight="55.0" prefWidth="134.0" text="Nombre" textAlignment="CENTER" />
                   <TextField fx:id="userTextField" prefHeight="25.0" prefWidth="177.0" GridPane.columnIndex="1" />
                   <Label alignment="CENTER" prefHeight="30.0" prefWidth="124.0" text="Contraseña" GridPane.rowIndex="1" />
-                  <TextField fx:id="passwordTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField fx:id="passwordConfirmTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <PasswordField fx:id="passwordTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <PasswordField fx:id="passwordConfirmTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Label alignment="CENTER" prefHeight="42.0" prefWidth="131.0" text="Confirmar Contraseña" GridPane.rowIndex="2" />
                   <Label alignment="CENTER" prefHeight="52.0" prefWidth="132.0" text="Apellido" GridPane.rowIndex="3" />
                   <Label alignment="CENTER" prefHeight="43.0" prefWidth="130.0" text="DNI" GridPane.rowIndex="4" />

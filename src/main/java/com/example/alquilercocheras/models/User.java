@@ -38,12 +38,28 @@ public class User {
         this.password = password;
     }
 
-    public boolean isAdmin() {
-        return admin;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getDNI() {
+        return DNI;
+    }
+
+    public void setDNI(String DNI) {
+        this.DNI = DNI;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public int getUserTypeId() {
@@ -54,17 +70,25 @@ public class User {
         this.userTypeId = userTypeId;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public boolean isAdmin() {
+        return admin;
     }
 
-    public void setDNI(String DNI) {
-        this.DNI = DNI;
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    @Override
+    public String toString() {
+        return "User{" +
+                "idUser=" + idUser +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", surname='" + surname + '\'' +
+                ", DNI='" + DNI + '\'' +
+                ", phone='" + phone + '\'' +
+                ", userTypeId=" + userTypeId +
+                ", admin=" + admin +
+                '}';
     }
-
-
 }

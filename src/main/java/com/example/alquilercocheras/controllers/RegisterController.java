@@ -1,6 +1,11 @@
 package com.example.alquilercocheras.controllers;
 
+import com.example.alquilercocheras.database.DatabaseManager;
+import com.example.alquilercocheras.database.UserTypeDAO;
+import com.example.alquilercocheras.database.UsersDAO;
 import com.example.alquilercocheras.models.User;
+import com.example.alquilercocheras.models.UserType;
+import com.example.alquilercocheras.utils.AlertPanel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -9,6 +14,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 // Do registry controller
@@ -33,7 +39,14 @@ public class RegisterController implements Initializable {
 
 
     public void initialize(URL location, ResourceBundle resources) {
-        userTypeID.getItems().addAll("1(USUARIO ADMINISTRAR)", "2(USUARIO NORMAL)");
+        List<UserType> userTypeList = UserTypeDAO.getUserTypes();
+        if (userTypeList == null) {
+            System.out.println("No se pudo obtener la lista de tipos de usuario");
+            return;
+        }
+        for (UserType userType : userTypeList) {
+            userTypeID.getItems().add(userType.getIdUserType() + "(" + userType.getDescription() + ")");
+        }
     }
 
     public void clearFields() {
@@ -47,55 +60,53 @@ public class RegisterController implements Initializable {
 
 
 
-
     @FXML
     private void handleRegisterButtononAction() {
-        try {
-            user = new User();
-            int userTypeId = 0;
-            String userName = userTextField.getText();
-            String password = passwordTextField.getText();
-            String passwordConfirm = passwordConfirmTextField.getText();
-            String surname = this.surname.getText();
-            String DNI = this.DNI.getText();
-            String phone = this.phone.getText();
-            String userTypeID = this.userTypeID.getValue();
-            userTypeId = Integer.parseInt(userTypeID);
-            user.setUsername(userName);
-            user.setPassword(password);
-            user.setSurname(surname);
-            user.setDNI(DNI);
-            user.setPhone(phone);
-            user.setUserTypeId(userTypeId);
 
-            if (userName.isEmpty() || password.isEmpty()
-                    || passwordConfirm.isEmpty()
-                    || surname.isEmpty()
-                    || DNI.isEmpty() ||
-                    phone.isEmpty()) {
+        try {
+            User newUser = new User();
+            if (userTextField.getText().isEmpty() || passwordTextField.getText().isEmpty()
+                    || passwordConfirmTextField.getText().isEmpty()
+                    || surname.getText().isEmpty()
+                    || DNI.getText().isEmpty() ||
+                    phone.getText().isEmpty()) {
+                AlertPanel.showSimpleAlert("Error", "Debe rellenar todos los campos");
                 System.out.println("Please fill all fields");
                 return;
             }
-            if (!password.equals(passwordConfirm)) {
+            if (!passwordTextField.getText().equals(passwordConfirmTextField.getText())) {
+                AlertPanel.showSimpleAlert("Error", "Las contraseñas no coinciden");
                 System.out.println("Passwords do not match");
                 clearFields();
                 return;
 
             }
+            if (userTypeID.getValue() == null) {
+                AlertPanel.showSimpleAlert("Error", "Debe seleccionar un tipo de usuario");
+                System.out.println("Please select a user type");
+                return;
+            }
+            newUser.setUsername(userTextField.getText());
+            newUser.setPassword(passwordTextField.getText());
+            newUser.setSurname(surname.getText());
+            newUser.setDNI(DNI.getText());
+            newUser.setPhone(phone.getText());
+            String userType = userTypeID.getValue();
+            newUser.setUserTypeId(Integer.parseInt(userType.substring(0, userType.indexOf("("))));
 
-            System.out.println("Username: " + userName);
-            System.out.println("Password: " + password);
-            System.out.println("Confirm Password: " + passwordConfirm);
-            System.out.println("Surname: " + surname);
-            System.out.println("DNI: " + DNI);
-            System.out.println("Phone: " + phone);
-            System.out.println("User Type: " + userTypeID);
+            System.out.println(newUser.toString());
+            UsersDAO.registerUser(newUser);
+
+            AlertPanel.showSimpleAlert("Registro", "Usuario registrado correctamente");
             clearFields();
-        } catch (NumberFormatException e) {
-            System.out.println("Rellena todos los campos");
+
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
 
 
     }
+
 
 }

@@ -1,5 +1,6 @@
 package com.example.alquilercocheras.controllers;
 
+import com.example.alquilercocheras.database.UsersDAO;
 import com.example.alquilercocheras.utils.AlertPanel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +24,7 @@ public class LoginController {
             String username = usernameText.getText();
             String password = passwordText.getText();
 
-            if (username.equals("admin") && password.equals("admin")) {
+            if (UsersDAO.getUser(username, password) != null) {
                 System.out.println("Login successful");
 
                 // Load the main menu
