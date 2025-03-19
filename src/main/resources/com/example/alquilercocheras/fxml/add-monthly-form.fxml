@@ -36,10 +36,10 @@
          </rowConstraints>
 
          <Label style="-fx-font-size: 14px; -fx-text-fill: #555;" text="Patente:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-         <TextField fx:id="nombreTextField" style="-fx-font-size: 14px; -fx-padding: 5px;" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+         <TextField fx:id="plateTextField" style="-fx-font-size: 14px; -fx-padding: 5px;" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
          <Label style="-fx-font-size: 14px; -fx-text-fill: #555;" text="Vehiculo:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-         <TextField fx:id="apellidoTextField" style="-fx-font-size: 14px; -fx-padding: 5px;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         <TextField fx:id="vehicleTextField" style="-fx-font-size: 14px; -fx-padding: 5px;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
          <Label style="-fx-font-size: 14px; -fx-text-fill: #555;" text="DNI:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
          <TextField fx:id="dniTextField" style="-fx-font-size: 14px; -fx-padding: 5px;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -47,13 +47,13 @@
          <Label style="-fx-font-size: 14px; -fx-text-fill: #555;" text="Teléfono:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
          <TextField fx:id="telefonoTextField" style="-fx-font-size: 14px; -fx-padding: 5px;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
-         <Button  style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 10px 20px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-font-weight: bold; -fx-cursor: hand;" text="Registrar" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+         <Button onAction="#handleRegisterButton" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 10px 20px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-font-weight: bold; -fx-cursor: hand;" text="Registrar" GridPane.columnIndex="1" GridPane.rowIndex="8" />
          <Label style="-fx-font-size: 14px; -fx-text-fill: #555;" text="Fecha Entrada:" GridPane.rowIndex="4" />
          <Label style="-fx-font-size: 14px; -fx-text-fill: #555;" text="Fecha Salida:" GridPane.rowIndex="5" />
-         <TextField fx:id="monthlyAmount"  style="-fx-font-size: 14px; -fx-padding: 5px;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+         <TextField fx:id="monthlyAmountTextField"  style="-fx-font-size: 14px; -fx-padding: 5px;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
          <Label style="-fx-font-size: 14px; -fx-text-fill: #555;" text="Monto:" GridPane.rowIndex="6" />
          <Label style="-fx-font-size: 14px; -fx-text-fill: #555;" text="Nombre y Apellido" GridPane.rowIndex="7" />
-         <TextField fx:id="nameAndSurname" style="-fx-font-size: 14px; -fx-padding: 5px;" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+         <TextField fx:id="nameAndSurnameTextField" style="-fx-font-size: 14px; -fx-padding: 5px;" GridPane.columnIndex="1" GridPane.rowIndex="7" />
          <DatePicker id="entryDate" fx:id="entryDatePicker" onAction="#getEntryDate" prefHeight="24.0" prefWidth="351.0" promptText="Ingresa una fecha de entrada" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          <DatePicker id="departureDate" fx:id="departureDatePicker" onAction="#getDepartureDate" prefHeight="24.0" prefWidth="351.0" promptText="Ingresa una fecha de salida" GridPane.columnIndex="1" GridPane.rowIndex="5" />
       </GridPane>
