@@ -13,7 +13,7 @@ public class AlquilerCocherasApp extends Application {
     public void start(Stage stage) throws IOException {
 
         DatabaseManager.initializeDatabase();
-
+/*
         if (DatabaseManager.databaseHasUsers()) {
             FXMLLoader fxmlLoader = new FXMLLoader(AlquilerCocherasApp.class.getResource("/com/example/alquilercocheras/fxml/login-view.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 400, 600);
@@ -28,7 +28,12 @@ public class AlquilerCocherasApp extends Application {
             stage.setScene(scene);
             stage.show();
         }
-
+*/
+        FXMLLoader fxmlLoader = new FXMLLoader(AlquilerCocherasApp.class.getResource("/com/example/alquilercocheras/fxml/add-monthly-form.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 400, 600);
+        stage.setTitle("Inicio");
+        stage.setScene(scene);
+        stage.show();
     }
 
     public static void main(String[] args) {
